@@ -23,19 +23,15 @@ class ColorGame {
   generateColors() {
     const colors = [];
 
-    // Generate base color
     const baseColor = this.generateRandomHSL();
     const targetColor = `hsl(${baseColor.h}, ${baseColor.s}%, ${baseColor.l}%)`;
     colors.push(targetColor);
 
-    // Generate one similar shade
     const similarLightness = Math.max(20, baseColor.l - 15);
     colors.push(`hsl(${baseColor.h}, ${baseColor.s}%, ${similarLightness}%)`);
 
-    // Generate 4 random colors
     for (let i = 0; i < 4; i++) {
       const randomColor = this.generateRandomHSL();
-      // Make sure the hue is different enough from the base color
       randomColor.h =
         (baseColor.h + 120 + Math.floor(Math.random() * 120)) % 360;
       colors.push(
@@ -57,7 +53,6 @@ class ColorGame {
     this.targetColor = colors[0];
     this.colorBox.style.backgroundColor = this.targetColor;
 
-    // Shuffle the colors
     const shuffledColors = colors.sort(() => Math.random() - 0.5);
     this.renderColorOptions(shuffledColors);
     this.gameStatus.textContent = "";
@@ -91,8 +86,6 @@ class ColorGame {
     }
   }
 }
-
-// Initialize the game when the page loads
 document.addEventListener("DOMContentLoaded", () => {
   new ColorGame();
 });
